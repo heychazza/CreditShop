@@ -7,9 +7,7 @@ import dev.morphia.annotations.PrePersist;
 import net.chazza.credits.storage.PlayerData;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity(value = "player", noClassnameStored = true)
 public class MongoDBPlayerData implements PlayerData {
@@ -21,7 +19,7 @@ public class MongoDBPlayerData implements PlayerData {
     @Indexed
     private String uuid;
     private String username;
-    private ArrayList<UUID> friends;
+    private int credits;
 
     public String getUuid() {
         return uuid;
@@ -40,23 +38,23 @@ public class MongoDBPlayerData implements PlayerData {
     }
 
     @Override
-    public ArrayList<UUID> getFriends() {
-        return friends;
+    public void addCredits(int amount) {
+        credits += amount;
     }
 
     @Override
-    public void addFriend(UUID uuid) {
-        friends.add(uuid);
+    public void removeCredits(int amount) {
+        credits -= amount;
     }
 
     @Override
-    public void removeFriend(UUID uuid) {
-        friends.remove(uuid);
+    public int getCredits() {
+        return credits;
     }
 
     @Override
-    public void setFriends(ArrayList<UUID> friends) {
-        this.friends = friends;
+    public void setCredits(int amount) {
+        credits = amount;
     }
 
     public ObjectId getId() {

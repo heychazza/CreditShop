@@ -120,9 +120,9 @@ public class Credits extends JavaPlugin {
 
     private void registerCommands() {
         commandManager = new CommandManager(this);
-        getCommand("f").setExecutor(new CommandExecutor(this));
-        if (getCommand("f").getPlugin() != this) {
-            getLogger().warning("/f command is being handled by plugin other than " + getDescription().getName() + ". You must use /friends:f instead.");
+        getCommand("credits").setExecutor(new CommandExecutor(this));
+        if (getCommand("credits").getPlugin() != this) {
+            getLogger().warning("/credits command is being handled by plugin other than " + getDescription().getName() + ". You must use /credits:credits instead.");
         }
     }
 

@@ -1,6 +1,5 @@
 package net.chazza.credits.storage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -23,11 +22,13 @@ public interface PlayerData {
 
     void setUsername(String username);
 
-    ArrayList<UUID> getFriends();
+    int credits = 0;
 
-    void addFriend(UUID uuid);
+    void addCredits(int amount);
 
-    void removeFriend(UUID uuid);
+    void removeCredits(int amount);
 
-    void setFriends(ArrayList<UUID> friends);
+    int getCredits();
+
+    void setCredits(int amount);
 }

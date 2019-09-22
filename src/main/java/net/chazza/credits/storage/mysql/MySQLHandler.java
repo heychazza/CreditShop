@@ -9,7 +9,6 @@ import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class MySQLHandler implements StorageHandler {
@@ -36,7 +35,7 @@ public class MySQLHandler implements StorageHandler {
                 user = new MySQLPlayerData();
                 user.setUuid(uuid.toString());
                 user.setUsername(name);
-                user.setFriends(new ArrayList<>());
+                user.setCredits(0);
                 PlayerData.get().put(uuid, user);
                 //accountDao.create(user);
             } else {

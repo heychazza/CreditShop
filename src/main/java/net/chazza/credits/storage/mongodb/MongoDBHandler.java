@@ -8,7 +8,6 @@ import dev.morphia.Morphia;
 import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class MongoDBHandler implements StorageHandler {
@@ -38,7 +37,7 @@ public class MongoDBHandler implements StorageHandler {
             MongoDBPlayerData newPlayerData = new MongoDBPlayerData();
             newPlayerData.setUuid(uuid.toString());
             newPlayerData.setUsername(name);
-            newPlayerData.setFriends(new ArrayList<>());
+            newPlayerData.setCredits(0);
             playerData = newPlayerData;
         }
 

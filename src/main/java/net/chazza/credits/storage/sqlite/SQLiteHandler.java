@@ -9,7 +9,6 @@ import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class SQLiteHandler implements StorageHandler {
@@ -36,7 +35,7 @@ public class SQLiteHandler implements StorageHandler {
                 user = new SQLitePlayerData();
                 user.setUuid(uuid.toString());
                 user.setUsername(name);
-                user.setFriends(new ArrayList<>());
+                user.setCredits(0);
                 PlayerData.get().put(uuid, user);
             } else {
                 PlayerData.get().put(uuid, user);

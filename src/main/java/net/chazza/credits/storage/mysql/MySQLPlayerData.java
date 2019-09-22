@@ -1,12 +1,8 @@
 package net.chazza.credits.storage.mysql;
 
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import net.chazza.credits.storage.PlayerData;
-
-import java.util.ArrayList;
-import java.util.UUID;
 
 @DatabaseTable(tableName = "players")
 public class MySQLPlayerData implements PlayerData {
@@ -17,8 +13,8 @@ public class MySQLPlayerData implements PlayerData {
     @DatabaseField(useGetSet = true)
     private String username;
 
-    @DatabaseField(useGetSet = true, dataType = DataType.SERIALIZABLE)
-    private ArrayList<UUID> friends;
+    @DatabaseField(useGetSet = true)
+    private int credits;
 
     public String getUuid() {
         return uuid;
@@ -37,25 +33,22 @@ public class MySQLPlayerData implements PlayerData {
     }
 
     @Override
-    public ArrayList<UUID> getFriends() {
-        return friends;
+    public void addCredits(int amount) {
+        credits += amount;
     }
 
     @Override
-    public void addFriend(UUID uuid) {
-        friends.add(uuid);
+    public void removeCredits(int amount) {
+        credits -= amount;
     }
 
     @Override
-    public void removeFriend(UUID uuid) {
-        friends.remove(uuid);
-
+    public int getCredits() {
+        return credits;
     }
 
     @Override
-    public void setFriends(ArrayList<UUID> friends) {
-        this.friends = friends;
+    public void setCredits(int amount) {
+        credits = amount;
     }
-
-
 }
