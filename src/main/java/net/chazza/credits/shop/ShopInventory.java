@@ -21,7 +21,7 @@ import java.util.List;
 public class ShopInventory extends Base {
 
     public ShopInventory(Credits plugin, Player player) {
-        super(plugin, Lang.GUI_TITLE.asString(Lang.PREFIX.asString(), plugin.getShopManager().getShopItems().size(), plugin.getShopManager().getShopItems().size()),
+        super(plugin, Lang.GUI_TITLE.asString(Lang.PREFIX.asString(), Common.getPlayer(player.getUniqueId()).getCredits(), plugin.getShopManager().getShopItems().size()),
                 Size.from(plugin.getConfig().getInt("settings.slots", 27)));
 
         PlayerData playerData = Common.getPlayer(player.getUniqueId());

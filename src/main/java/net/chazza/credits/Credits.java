@@ -4,21 +4,27 @@ import dev.chapi.api.exception.InvalidMaterialException;
 import dev.chapi.api.item.ItemBuilder;
 import net.chazza.credits.command.util.CommandExecutor;
 import net.chazza.credits.command.util.CommandManager;
+import net.chazza.credits.listener.JoinListener;
 import net.chazza.credits.maven.LibraryLoader;
 import net.chazza.credits.maven.MavenLibrary;
 import net.chazza.credits.shop.ShopItem;
 import net.chazza.credits.shop.ShopManager;
+import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
 import net.chazza.credits.storage.mongodb.MongoDBHandler;
 import net.chazza.credits.storage.mysql.MySQLHandler;
 import net.chazza.credits.storage.sqlite.SQLiteHandler;
 import net.chazza.credits.util.Common;
+import net.chazza.credits.util.ConsoleFilter;
 import net.chazza.credits.util.Lang;
+import org.apache.logging.log4j.LogManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @MavenLibrary(groupId = "org.apache.logging.log4j", artifactId = "log4j-core", version = "2.7")
 public class Credits extends JavaPlugin {
@@ -43,20 +49,19 @@ public class Credits extends JavaPlugin {
     public void onEnable() {
         long start = System.currentTimeMillis();
         saveDefaultConfig();
-        Lang.init(this);
         getBanner();
 
         Common.loading("libraries");
 //        setupChat();
 
         Common.loading("events");
-//        new JoinListener(this);
-//
-//        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-//        mongoLogger.setLevel(Level.SEVERE);
-//        org.apache.logging.log4j.core.Logger logger;
-//        logger = (org.apache.logging.log4j.core.Logger) LogManager.getRootLogger();
-//        logger.addFilter(new ConsoleFilter());
+        new JoinListener(this);
+
+        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.SEVERE);
+        org.apache.logging.log4j.core.Logger logger;
+        logger = (org.apache.logging.log4j.core.Logger) LogManager.getRootLogger();
+        logger.addFilter(new ConsoleFilter());
         handleReload();
 
         Common.loading("commands");
@@ -82,9 +87,9 @@ public class Credits extends JavaPlugin {
 
     @Override
     public void onDisable() {
-//        PlayerData.users.forEach(((uuid, playerData) -> {
-//            getStorageHandler().pushData(uuid);
-//        }));
+        PlayerData.users.forEach(((uuid, playerData) -> {
+            getStorageHandler().pushData(uuid);
+        }));
     }
 
     private void setupStorage() {
@@ -130,7 +135,6 @@ public class Credits extends JavaPlugin {
 
         for (String itemId : getConfig().getConfigurationSection("items").getKeys(false)) {
             String path = "items." + itemId;
-            getLogger().info("Configuring the '" + itemId + "' shop..");
 
             int price = getConfig().getInt(path + ".cost", 1);
 
@@ -170,11 +174,8 @@ public class Credits extends JavaPlugin {
 
     public void handleReload() {
         reloadConfig();
-
         Common.loading("config");
         Lang.init(this);
-        setupShop();
-
         setupStorage();
     }
 }

@@ -4,7 +4,7 @@
 # \___/
 
 settings:
-  slots: 27 # Shop slot size, multiple of 9.
+  slots: 27
   storage:
     type: SQLITE
     database: credits

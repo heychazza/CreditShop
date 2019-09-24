@@ -35,9 +35,7 @@ public enum Lang {
     GUI_TITLE("Credits Shop (Balance: {0})"),
 
     CANNOT_AFFORD("{1} &7You need &e{2} &7more credits to purchase this item."),
-    PURCHASED("{1} &7You've spent &6{2} &7credits and now have &e{3} &7left.")
-
-    ;
+    PURCHASED("{1} &7You've spent &6{2} &7credits and now have &e{3} &7left.");
 
     private String message;
     private static FileConfiguration c;
@@ -58,8 +56,8 @@ public enum Lang {
         return Common.translate(s);
     }
 
-    public static void init(Credits friends) {
-        Lang.c = friends.getConfig();
+    public static boolean init(Credits levellingTools) {
+        Lang.c = levellingTools.getConfig();
         for (final Lang value : values()) {
             if (value.getMessage().split("\n").length == 1) {
                 Lang.c.addDefault(value.getPath().toLowerCase(), value.getMessage());
@@ -68,7 +66,8 @@ public enum Lang {
             }
         }
         Lang.c.options().copyDefaults(true);
-        friends.saveConfig();
+        levellingTools.saveConfig();
+        return true;
     }
 
     public String getPath() {
