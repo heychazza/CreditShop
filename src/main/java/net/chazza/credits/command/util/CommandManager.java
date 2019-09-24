@@ -1,7 +1,8 @@
 package net.chazza.credits.command.util;
 
 import net.chazza.credits.Credits;
-import net.chazza.credits.command.ReloadCommand;
+import net.chazza.credits.command.*;
+import net.chazza.credits.util.Lang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -26,7 +27,11 @@ public class CommandManager {
         this.plugin = plugin;
 
         List<Class<?>> commandClasses = Arrays.asList(
-                ReloadCommand.class
+                BalanceCommand.class,
+                SetCommand.class,
+                ReloadCommand.class,
+                ShopCommand.class,
+                ResetCommand.class
         );
 
         for (Class cmdClass : commandClasses) {
@@ -54,14 +59,12 @@ public class CommandManager {
 
     boolean handle(CommandSender sender, String command, String[] args) {
         if (command == null) {
-            // main command
-
-//            Lang.HEADER.send(sender);
-//            for (Map.Entry<String, Method> commandEntry : commands.entrySet()) {
-//                Command commandAnnotation = commandEntry.getValue().getAnnotation(Command.class);
-//                Lang.COMMAND_FORMAT.send(sender, commandAnnotation.usage(), commandAnnotation.about());
-//            }
-//            Lang.FOOTER.send(sender);
+            Lang.HEADER.send(sender);
+            for (Map.Entry<String, Method> commandEntry : commands.entrySet()) {
+                Command commandAnnotation = commandEntry.getValue().getAnnotation(Command.class);
+                Lang.COMMAND_FORMAT.send(sender, commandAnnotation.usage(), commandAnnotation.about());
+            }
+            Lang.FOOTER.send(sender);
             return true;
         }
 
@@ -71,17 +74,17 @@ public class CommandManager {
                 Command commandAnnotation = commandMethod.getAnnotation(Command.class);
 
                 if (!sender.hasPermission(commandAnnotation.permission()) && (sender instanceof Player)) {
-//                    Lang.NO_PERMISSION.send(sender);
+                    Lang.NO_PERMISSION.send(sender, Lang.HEADER.asString(), Lang.PREFIX.asString(), Lang.FOOTER.asString());
                     return true;
                 }
 
                 if (commandMethod.getParameters()[0].getType() == Player.class && !(sender instanceof Player)) {
-//                    Lang.PLAYERS_ONLY.send(sender);
+                    Lang.PLAYERS_ONLY.send(sender, Lang.HEADER.asString(), Lang.PREFIX.asString(), Lang.FOOTER.asString());
                     return true;
                 }
 
                 if (args.length < commandAnnotation.requiredArgs()) {
-//                    Lang.USAGE.send(sender, commandAnnotation.usage());
+                    Lang.USAGE.send(sender, Lang.HEADER.asString(), Lang.PREFIX.asString(), commandAnnotation.usage(), Lang.FOOTER.asString());
                     return true;
                 }
 
@@ -90,7 +93,7 @@ public class CommandManager {
                 e.printStackTrace();
             }
         } else {
-//            Lang.INVALID_COMMAND.send(sender);
+            Lang.INVALID_COMMAND.send(sender, Lang.HEADER.asString(), Lang.PREFIX.asString(), Lang.FOOTER.asString());
         }
 
         return true;

@@ -5,11 +5,15 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.WriteConcern;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
+import net.chazza.credits.maven.MavenLibrary;
 import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
+import net.chazza.credits.util.SerializedMap;
 
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
+@MavenLibrary(groupId = "dev.morphia.morphia", artifactId = "core", version = "1.5.2")
 public class MongoDBHandler implements StorageHandler {
 
     private MongoClient client;
@@ -34,11 +38,12 @@ public class MongoDBHandler implements StorageHandler {
         MongoDBPlayerData playerData = datastore.createQuery(MongoDBPlayerData.class).filter("uuid", uuid.toString()).get();
 
         if (playerData == null) {
-            MongoDBPlayerData newPlayerData = new MongoDBPlayerData();
-            newPlayerData.setUuid(uuid.toString());
-            newPlayerData.setUsername(name);
-            newPlayerData.setCredits(0);
-            playerData = newPlayerData;
+            MongoDBPlayerData user = new MongoDBPlayerData();
+            user.setUuid(uuid.toString());
+            user.setUsername(name);
+            user.setCredits(0);
+            user.setPurchases(new SerializedMap<>());
+            playerData = user;
         }
 
         PlayerData.get().put(uuid, playerData);

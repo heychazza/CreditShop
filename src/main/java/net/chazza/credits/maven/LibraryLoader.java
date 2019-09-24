@@ -25,7 +25,7 @@
 
 package net.chazza.credits.maven;
 
-import net.chazza.friends.Friends;
+import net.chazza.credits.Credits;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -112,7 +112,7 @@ public final class LibraryLoader {
             throw new RuntimeException("Unable to download dependency: " + d.toString());
         }
 
-        URLClassLoader classLoader = (URLClassLoader) JavaPlugin.getPlugin(Friends.class).getClass().getClassLoader();
+        URLClassLoader classLoader = (URLClassLoader) JavaPlugin.getPlugin(Credits.class).getClass().getClassLoader();
         try {
             ADD_URL_METHOD.invoke(classLoader, saveLocation.toURI().toURL());
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public final class LibraryLoader {
     }
 
     private static File getLibFolder() {
-        File pluginDataFolder = JavaPlugin.getPlugin(Friends.class).getDataFolder();
+        File pluginDataFolder = JavaPlugin.getPlugin(Credits.class).getDataFolder();
         File pluginsDir = pluginDataFolder.getParentFile();
         File libs = new File(pluginsDir, "ChazzaLibs");
         libs.mkdirs();

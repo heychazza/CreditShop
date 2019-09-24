@@ -5,6 +5,7 @@ import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Indexed;
 import dev.morphia.annotations.PrePersist;
 import net.chazza.credits.storage.PlayerData;
+import net.chazza.credits.util.SerializedMap;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class MongoDBPlayerData implements PlayerData {
     @Indexed
     private String uuid;
     private String username;
+    private SerializedMap<String, Integer> purchases;
     private int credits;
 
     public String getUuid() {
@@ -31,6 +33,11 @@ public class MongoDBPlayerData implements PlayerData {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public SerializedMap<String, Integer> getPurchases() {
+        return purchases;
     }
 
     public void setUsername(String username) {
@@ -55,6 +62,11 @@ public class MongoDBPlayerData implements PlayerData {
     @Override
     public void setCredits(int amount) {
         credits = amount;
+    }
+
+    @Override
+    public void setPurchases(SerializedMap<String, Integer> purchases) {
+        this.purchases = purchases;
     }
 
     public ObjectId getId() {

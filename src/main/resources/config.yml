@@ -1,91 +1,47 @@
-#     ____
-#    / __/
-#   / _/  Friends
-#  /_/    Developed by Chazza.net
-expiry: 5
+#   _____
+#  / ___/
+# / /__   Credits
+# \___/
 
 settings:
-  # This is where all your player data will be saved.
-  # It is not recommended to change this on a live
-  # server, as players can lose data.
+  slots: 27 # Shop slot size, multiple of 9.
   storage:
-    # Options: SQLITE, MYSQL & MONGODB
     type: SQLITE
-    database: "friends"
-    host: "127.0.0.1"
+    database: credits
+    host: 127.0.0.1
     port: 27017
-    username: ""
-    password: ""
-
+    username: ''
+    password: ''
+items:
+  worldedit:
+    cost: 100
+    limit: -1
+    item:
+      name: '&a&lWorldEdit &a(30m)'
+      lore:
+        - ''
+        - '&7Purchasing this will provide'
+        - '&730 minutes of WorldEdit usage.'
+        - ''
+        - '&7Cost: &e{cost} Credits'
+      material: WOOD_AXE
+    actions:
+      - '[message] &7You purchased WorldEdit.'
 message:
   header: '&7'
   footer: '&7'
-  no_permission: '&6[&eRC&6] &7You don''t have permission to use that.'
-  invalid_command: '&6[&eRC&6] &7Unknown friend command, use &e/f&7.'
-  players_only: '&6[&eRC&6] &7This command can only be used in-game.'
-  usage: '&6[&eRC&6] &7Usage: &e/f {0}&7.'
-  command_format: ' &6/f &e{0} &7({1})'
-  received:
-    - '{0}'
-    - '&6[&eRC&6] &7Friend request from &e{1}&7.'
-    - '[JSON]{"text":"","extra":[{"text":"&6[&eRC&6] "},{"text":"Click to ","color":"gray"},{"text":"ACCEPT","color":"green","bold":true,"clickEvent":{"action":"run_command","value":"/f
-    add {1}"},"hoverEvent":{"action":"show_text","value":["",{"text":"","extra":[{"text":"Click
-    to add ","color":"green"},{"text":"{1}","bold":true}]}]}},{"text":" or ","color":"gray"},{"text":"DENY","color":"red","bold":true,"clickEvent":{"action":"run_command","value":"/f
-    deny {1}"},"hoverEvent":{"action":"show_text","value":["",{"text":"","extra":[{"text":"Click
-    to deny ","color":"red"},{"text":"{1}","bold":true}]}]}},{"text":" this request.","color":"gray"}]}'
-    - '{2}'
-  sent:
-    - '&6[&eRC&6] &7Friend request sent to &e{1}&7, they have &e{2} minutes &7to accept
-    it!'
-  expired:
-    - '&6[&eRC&6] &7Your friend request to &e{1} &7has expired&7.'
-  accepted:
-    - '&6[&eRC&6] &7You''re now friends with &e{1}&7.'
-  accepted_by:
-    - '&6[&eRC&6] &7You''re now friends with &e{1}&7.'
-  already_sent:
-    - '&6[&eRC&6] &7You''ve already sent &e{1} &7a friend request.'
-  already_friends:
-    - '&6[&eRC&6] &7You''re already friends with &e{1}&7.'
-  cannot_use_on_self:
-    - '&6[&eRC&6] &7You cannot do this on yourself. Try another player?'
-  not_online:
-    - '&6[&eRC&6] &e{1} &7isn''t online and cannot be added.'
-  denied:
-    - '&6[&eRC&6] &7Your friend request with &e{1} &7has been denied.'
-  denied_by:
-    - '&6[&eRC&6] &e{1} &7has denied your friend request.'
-  no_request:
-    - '&6[&eRC&6] &7You don''t have a friend request from &e{1}&7.'
-  friend_format_online_server: '[JSON]["",{"text":" - ","color":"yellow"},{"text":"{1}
-    {0}","clickEvent":{"action":"suggest_command","value":"/msg {0} "},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Click
-    to message player.","color":"gray"}]}},"color":"white"},{"text":" \u25cf","color":"green"}]'
-  friend_format_online: '[JSON]["",{"text":" - ","color":"yellow"},{"text":"{1} {0}","clickEvent":{"action":"run_command","value":"/server
-    {2}"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Click
-    to join server.","color":"gray"}]}},"color":"white"},{"text":" \u25cf","color":"green"}]'
-  friend_format_offline: '[JSON]["",{"text":" -","color":"yellow"},{"text":" {1} {0}
-    "},{"text":"\u25cf","color":"red"}]'
-  friend_header:
-    - '[JSON]["",{"text":"[","color":"yellow"},{"text":"<","clickEvent":{"action":"run_command","value":"/f
-    list {0}"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Previous
-    Page","color":"gray"}]}},"color":"white"},{"text":"] ","color":"yellow"},{"text":"[Friends
-    List - Page","color":"yellow"},{"text":" {1} ","color":"gold"},{"text":"of {3}]","color":"yellow"},{"text":"
-    [","color":"yellow"},{"text":">","color":"gold","clickEvent":{"action":"run_command","value":"/f
-    list {2}"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Next
-    Page","color":"gray"}]}}},{"text":"]","color":"yellow"}]'
-  friend_header_left:
-    - '[JSON]["",{"text":"[","color":"yellow"},{"text":"<","clickEvent":{"action":"run_command","value":"/f
-    list {0}"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Previous
-    Page","color":"gray"}]}},"color":"white"},{"text":"] ","color":"yellow"},{"text":"[Friends
-    List - Page","color":"yellow"},{"text":" {1} ","color":"gold"},{"text":"of {3}]","color":"yellow"}]'
-  friend_header_right:
-    - '[JSON]["",{"text":"[Friends List - Page","color":"yellow"},{"text":" {1} ","color":"gold"},{"text":"of
-    {3}]","color":"yellow"},{"text":" [","color":"yellow"},{"text":">","color":"gold","clickEvent":{"action":"run_command","value":"/f
-    list {2}"},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Next
-    Page","color":"gray"}]}}},{"text":"]","color":"yellow"}]'
-  friend_header_neither:
-    - '[JSON]["",{"text":"[Friends List - Page","color":"yellow"},{"text":" {1} ","color":"gold"},{"text":"of
-    {3}]","color":"yellow"}]'
-  friend_format_online_servesr: '[JSON]["",{"text":" - ","color":"yellow"},{"text":"{1}
-    {0}","clickEvent":{"action":"suggest_command","value":"/msg {0} "},"hoverEvent":{"action":"show_text","value":{"text":"","extra":[{"text":"Click
-    to message {0}.","color":"gray"}]}},"color":"white"},{"text":" \u25cf","color":"green"}]'
+  prefix: '&8[&eRC&8]&7'
+  no_permission: '{1} You don''t have permission to use that.'
+  invalid_command: '{1} Unknown sub-command, try &e/credits&7.'
+  players_only: '{1} This command can only be used in-game.'
+  usage: '{1} Usage: &e/credits {2}&7.'
+  must_be_a_number: '{1} You must specify a valid number.'
+  reload: '{1} Configuration reloaded.'
+  command_format: ' &6/credits &e{0} &7({1})'
+  balance: '{1} Credits: &e{2}'
+  set_balance: '{1} You set &6{2}''s &7balance to &e{3}&7.'
+  reset_item_count: '{1} You reset &6{2}''s &7purchase count for the &e{3} &7shop.'
+  no_item_found: '{1} No shop item was found by the id ''&e{2}&7''.'
+  gui_title: 'Credits Shop (Balance: {1})'
+  cannot_afford: '{1} &7You need &6{2} &7more credits to purchase this item.'
+  purchased: '{1} &7You''ve spent &6{2} &7credits and now have &e{3} &7left.'

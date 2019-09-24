@@ -5,12 +5,18 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import net.chazza.credits.maven.MavenLibrary;
+import net.chazza.credits.maven.Repository;
 import net.chazza.credits.storage.PlayerData;
 import net.chazza.credits.storage.StorageHandler;
+import net.chazza.credits.util.SerializedMap;
 
 import java.sql.SQLException;
 import java.util.UUID;
 
+@MavenLibrary(groupId = "com.github.j256", artifactId = "ormlite-core", version = "4.43", repo = @Repository(url = "https://jitpack.io"))
+@MavenLibrary(groupId = "com.github.j256", artifactId = "ormlite-jdbc", version = "4.43", repo = @Repository(url = "https://jitpack.io"))
+@MavenLibrary(groupId = "org.xerial", artifactId = "sqlite-jdbc", version = "3.7.2")
 public class SQLiteHandler implements StorageHandler {
 
     private ConnectionSource connectionSource;
@@ -36,6 +42,7 @@ public class SQLiteHandler implements StorageHandler {
                 user.setUuid(uuid.toString());
                 user.setUsername(name);
                 user.setCredits(0);
+                user.setPurchases(new SerializedMap<>());
                 PlayerData.get().put(uuid, user);
             } else {
                 PlayerData.get().put(uuid, user);

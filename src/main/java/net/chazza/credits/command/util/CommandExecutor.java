@@ -1,7 +1,6 @@
 package net.chazza.credits.command.util;
 
 import net.chazza.credits.Credits;
-import net.chazza.friends.Friends;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandExecutor implements org.bukkit.command.CommandExecutor, TabCompleter {
-    private final Friends plugin;
+    private final Credits plugin;
 
     public CommandExecutor(Credits plugin) {
         this.plugin = plugin;

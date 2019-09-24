@@ -1,8 +1,10 @@
 package net.chazza.credits.storage.sqlite;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import net.chazza.credits.storage.PlayerData;
+import net.chazza.credits.util.SerializedMap;
 
 @DatabaseTable(tableName = "players")
 public class SQLitePlayerData implements PlayerData {
@@ -16,6 +18,9 @@ public class SQLitePlayerData implements PlayerData {
     @DatabaseField(useGetSet = true)
     private int credits;
 
+    @DatabaseField(useGetSet = true, dataType = DataType.SERIALIZABLE)
+    private SerializedMap<String, Integer> purchases;
+
     public String getUuid() {
         return uuid;
     }
@@ -26,6 +31,11 @@ public class SQLitePlayerData implements PlayerData {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public SerializedMap<String, Integer> getPurchases() {
+        return purchases;
     }
 
     public void setUsername(String username) {
@@ -50,5 +60,10 @@ public class SQLitePlayerData implements PlayerData {
     @Override
     public void setCredits(int amount) {
         credits = amount;
+    }
+
+    @Override
+    public void setPurchases(SerializedMap<String, Integer> purchases) {
+        this.purchases = purchases;
     }
 }

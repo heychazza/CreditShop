@@ -169,6 +169,16 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>dev.chapi</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Chazza</groupId>
+            <artifactId>Base</artifactId>
+            <version>dev-753c734c43-1</version>
+        </dependency>
     </dependencies>
 
     <repositories>

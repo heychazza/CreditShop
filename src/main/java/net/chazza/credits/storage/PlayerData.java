@@ -1,5 +1,7 @@
 package net.chazza.credits.storage;
 
+import net.chazza.credits.util.SerializedMap;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,9 +22,9 @@ public interface PlayerData {
 
     String getUsername();
 
-    void setUsername(String username);
+    SerializedMap<String, Integer> getPurchases();
 
-    int credits = 0;
+    void setUsername(String username);
 
     void addCredits(int amount);
 
@@ -31,4 +33,6 @@ public interface PlayerData {
     int getCredits();
 
     void setCredits(int amount);
+
+    void setPurchases(SerializedMap<String, Integer> purchases);
 }
