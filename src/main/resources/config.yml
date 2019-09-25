@@ -27,6 +27,20 @@ items:
       material: WOOD_AXE
     actions:
       - '[message] &7You purchased WorldEdit.'
+  ironingot:
+    cost: 100
+    limit: -1
+    item:
+      name: '&f3x Iron Ingot'
+      lore:
+        - ''
+        - '&7Purchasing this will provide'
+        - '&7you with &f3x Iron Ingots&7.'
+        - ''
+        - '&7Cost: &e{cost} Credits'
+      material: IRON_INGOT
+    actions:
+      - '[console] give %player% minecraft:iron_ingot 3'
 message:
   header: '&7'
   footer: '&7'
@@ -43,5 +57,5 @@ message:
   reset_item_count: '{1} You reset &6{2}''s &7purchase count for the &e{3} &7shop.'
   no_item_found: '{1} No shop item was found by the id ''&e{2}&7''.'
   gui_title: 'Credits Shop (Balance: {1})'
-  cannot_afford: '{1} &7You need &6{2} &7more credits to purchase this item.'
+  cannot_afford: '{1} &7You need &e{2} &7more credits to purchase this item.'
   purchased: '{1} &7You''ve spent &6{2} &7credits and now have &e{3} &7left.'

@@ -1,27 +1,29 @@
 name: ${plugin}
 version: ${project.version}
 main: ${package}
-author: Chazza
-website: https://chazza.net/
-description: "The ultimate way to make your server stand out from the rest."
-softdepend: ["PlaceholderAPI", "WorldGuard"]
+author: "Felux"
+website: https://felux.io/
+description: "An all-in-one credit plugin solution with shop support."
+softdepend: ["PlaceholderAPI"]
 
 commands:
   credits:
     description: ${plugin} commands
     usage: ""
-    aliases: ["c"]
+    aliases: ["c", "credit", "royalcredits"]
 
 permissions:
-  credits.give:
-    description: Give yourself or a player a levelling tool
+  credits.set:
+    description: Set a players balance.
   credits.reload:
-    description: Reload the configuration file into memory
-  credits.help:
-    description: View commands you have access to within the plugin
-  credits.info:
-    description: View information about the plugin
+    description: Reload plugin.
+  credits.shop:
+    description: View the shop.
     default: true
-  credits.xp:
-    description: View yourself or another players xp amount
+  credits.balance:
+    description: View balance.
     default: true
+  credits.reset:
+    description: Reset a players balance.
+  credits.add:
+    description: Add to a players balance.
